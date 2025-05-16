@@ -12,12 +12,13 @@ class CategoryEntity {
   }
 
   // Add a category
+  // Add a category
   addCategory(category) {
     return new Promise((resolve, reject) => {
       const query = "INSERT INTO categories (category) VALUES (?)";
       db.query(query, [category], (err, results) => {
         if (err) return reject(err);
-        resolve({ category });
+        resolve({ categoryID: results.insertId, category });
       });
     });
   }
