@@ -1,6 +1,6 @@
-const express = require('express');
+import express from "express";
+import { serviceEntity } from "../entities/serviceEntity.js";
 const router = express.Router();
-const serviceEntity = require('../entities/serviceEntity');
 
 // === Controllers ===
 
@@ -11,7 +11,9 @@ class GetAllServicesController {
       const services = await serviceEntity.getAllServices();
       res.status(200).json(services);
     } catch (error) {
-      res.status(500).json({ error: 'Failed to fetch services', details: error });
+      res
+        .status(500)
+        .json({ error: "Failed to fetch services", details: error });
     }
   }
 }
@@ -24,7 +26,7 @@ class GetServiceByIdController {
       const service = await serviceEntity.getServiceById(Number(serviceID));
       res.status(200).json(service);
     } catch (error) {
-      res.status(404).json({ error: 'Service not found', details: error });
+      res.status(404).json({ error: "Service not found", details: error });
     }
   }
 }
@@ -34,10 +36,14 @@ class GetServicesByCleanerController {
   static async getByCleaner(req, res) {
     const { cleanerID } = req.params;
     try {
-      const services = await serviceEntity.getServicesByCleanerId(Number(cleanerID));
+      const services = await serviceEntity.getServicesByCleanerId(
+        Number(cleanerID)
+      );
       res.status(200).json(services);
     } catch (error) {
-      res.status(404).json({ error: 'Services not found for this cleaner', details: error });
+      res
+        .status(404)
+        .json({ error: "Services not found for this cleaner", details: error });
     }
   }
 }
@@ -48,14 +54,22 @@ class CreateServiceController {
     const { category, cleanerID, price } = req.body;
 
     if (!category || !cleanerID || !price) {
-      return res.status(400).json({ error: 'Category, cleanerID, and price are required' });
+      return res
+        .status(400)
+        .json({ error: "Category, cleanerID, and price are required" });
     }
 
     try {
-      const newService = await serviceEntity.addService(category, cleanerID, price);
-      res.status(201).json({ message: 'Service added successfully', service: newService });
+      const newService = await serviceEntity.addService(
+        category,
+        cleanerID,
+        price
+      );
+      res
+        .status(201)
+        .json({ message: "Service added successfully", service: newService });
     } catch (error) {
-      res.status(500).json({ error: 'Failed to add service', details: error });
+      res.status(500).json({ error: "Failed to add service", details: error });
     }
   }
 }
@@ -67,10 +81,23 @@ class UpdateServiceController {
     const updatedData = req.body;
 
     try {
-      const updatedService = await serviceEntity.updateService(Number(serviceID), updatedData);
-      res.status(200).json({ message: 'Service updated successfully', service: updatedService });
+      const updatedService = await serviceEntity.updateService(
+        Number(serviceID),
+        updatedData
+      );
+      res
+        .status(200)
+        .json({
+          message: "Service updated successfully",
+          service: updatedService,
+        });
     } catch (error) {
-      res.status(404).json({ error: 'Service not found or failed to update', details: error });
+      res
+        .status(404)
+        .json({
+          error: "Service not found or failed to update",
+          details: error,
+        });
     }
   }
 }
@@ -81,9 +108,14 @@ class DeleteServiceController {
     const { serviceID } = req.params;
     try {
       await serviceEntity.deleteService(Number(serviceID));
-      res.status(200).json({ message: 'Service deleted successfully' });
+      res.status(200).json({ message: "Service deleted successfully" });
     } catch (error) {
-      res.status(404).json({ error: 'Service not found or failed to delete', details: error });
+      res
+        .status(404)
+        .json({
+          error: "Service not found or failed to delete",
+          details: error,
+        });
     }
   }
 }
@@ -93,22 +125,34 @@ class GetServicesByHownerController {
   static async getByHowner(req, res) {
     const { hownerID } = req.params;
     try {
-      const services = await serviceEntity.getServicesByHownerId(Number(hownerID));
+      const services = await serviceEntity.getServicesByHownerId(
+        Number(hownerID)
+      );
       res.status(200).json(services);
     } catch (error) {
-      res.status(404).json({ error: 'Services not found for this homeowner', details: error });
+      res
+        .status(404)
+        .json({
+          error: "Services not found for this homeowner",
+          details: error,
+        });
     }
   }
 }
 
-
 // === Routes ===
-router.get('/services', GetAllServicesController.getAll); // Get all services
-router.get('/services/:serviceID', GetServiceByIdController.getById); // Get service by ID
-router.get('/services/cleaner/:cleanerID', GetServicesByCleanerController.getByCleaner); // Get services by cleaner ID
-router.post('/services', CreateServiceController.create); // Add new service
-router.put('/services/:serviceID', UpdateServiceController.update); // Update service
-router.delete('/services/:serviceID', DeleteServiceController.delete); // Delete service
-router.get('/services/howner/:hownerID', GetServicesByHownerController.getByHowner); // Get services by hownerID
+router.get("/services", GetAllServicesController.getAll); // Get all services
+router.get("/services/:serviceID", GetServiceByIdController.getById); // Get service by ID
+router.get(
+  "/services/cleaner/:cleanerID",
+  GetServicesByCleanerController.getByCleaner
+); // Get services by cleaner ID
+router.post("/services", CreateServiceController.create); // Add new service
+router.put("/services/:serviceID", UpdateServiceController.update); // Update service
+router.delete("/services/:serviceID", DeleteServiceController.delete); // Delete service
+router.get(
+  "/services/howner/:hownerID",
+  GetServicesByHownerController.getByHowner
+); // Get services by hownerID
 
-module.exports = router;
+export default router;

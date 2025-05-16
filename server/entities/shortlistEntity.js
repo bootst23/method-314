@@ -1,10 +1,11 @@
-const db = require('../db'); // Assuming db.js is set up with your database connection
+import { db } from "../db.js";
 
 class ShortlistEntity {
   // Add a shortlist
   addShortlist(serviceID, hownerID) {
     return new Promise((resolve, reject) => {
-      const query = 'INSERT INTO shortlists (serviceID, hownerID) VALUES (?, ?)';
+      const query =
+        "INSERT INTO shortlists (serviceID, hownerID) VALUES (?, ?)";
       db.query(query, [serviceID, hownerID], (err, results) => {
         if (err) return reject(err);
         resolve({ serviceID, hownerID });
@@ -15,7 +16,8 @@ class ShortlistEntity {
   // Remove a shortlist
   removeShortlist(serviceID, hownerID) {
     return new Promise((resolve, reject) => {
-      const query = 'DELETE FROM shortlists WHERE serviceID = ? AND hownerID = ?';
+      const query =
+        "DELETE FROM shortlists WHERE serviceID = ? AND hownerID = ?";
       db.query(query, [serviceID, hownerID], (err, results) => {
         if (err) return reject(err);
         resolve({ serviceID, hownerID });
@@ -41,10 +43,10 @@ class ShortlistEntity {
       });
     });
   }
-  
+
   getHomeownersByService(serviceID) {
     return new Promise((resolve, reject) => {
-      const query = 'SELECT hownerID FROM shortlists WHERE serviceID = ?';
+      const query = "SELECT hownerID FROM shortlists WHERE serviceID = ?";
       db.query(query, [serviceID], (err, results) => {
         if (err) return reject(err);
         resolve(results);
@@ -53,4 +55,5 @@ class ShortlistEntity {
   }
 }
 
-module.exports = new ShortlistEntity();
+const shortlistEntity = new ShortlistEntity();
+export { shortlistEntity };

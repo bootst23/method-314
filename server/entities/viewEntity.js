@@ -1,10 +1,10 @@
-const db = require('../db'); // Assuming db.js is set up with your database connection
+import { db } from "../db.js";
 
 class ViewEntity {
   // Insert a view record
   addView(serviceID, accountID) {
     return new Promise((resolve, reject) => {
-      const query = 'INSERT INTO views (serviceID, accountID) VALUES (?, ?)';
+      const query = "INSERT INTO views (serviceID, accountID) VALUES (?, ?)";
       db.query(query, [serviceID, accountID], (err, results) => {
         if (err) return reject(err);
         resolve({ serviceID, accountID });
@@ -32,4 +32,6 @@ class ViewEntity {
   }
 }
 
-module.exports = new ViewEntity();
+const viewEntity = new ViewEntity();
+
+export { viewEntity };
