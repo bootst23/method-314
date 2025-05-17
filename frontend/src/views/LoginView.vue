@@ -33,6 +33,10 @@ const onSubmit = form.handleSubmit(async (values) => {
     });
     const user = await res.json<AccountResponse>();
 
+    if (user.user.suspended === 1) {
+      toast.error("You have been suspended");
+      return;
+    }
     const roleStorage = useStorage("role", "");
     const userIdStorage = useStorage("userId", -1);
     const usernameStorage = useStorage("username", "");
@@ -67,7 +71,9 @@ const onSubmit = form.handleSubmit(async (values) => {
 <template>
   <div class="flex w-full h-full items-center justify-center">
     <Card class="sm:w-full lg:w-96">
-      <CardHeader> <CardTitle>Login</CardTitle> </CardHeader>
+      <CardHeader>
+        <CardTitle>Login</CardTitle>
+      </CardHeader>
       <CardContent>
         <form @submit="onSubmit" class="space-y-4">
           <FormField v-slot="{ componentField }" name="username">
