@@ -1,5 +1,5 @@
 import express from "express";
-import { userAccountEntity } from "../entities/userAccountEntity";
+import { userAccountEntity } from "../entities/userAccountEntity.js";
 const router = express.Router();
 
 class LoginController {

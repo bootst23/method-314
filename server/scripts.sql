@@ -169,7 +169,7 @@ SET s.view = v.view_count;
 INSERT INTO shortlists (serviceID, hownerID)
 VALUES
   (2, 2),
-  (4, 1);
+  (3, 1);
   
 UPDATE services s
 JOIN (

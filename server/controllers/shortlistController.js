@@ -1,5 +1,5 @@
 import express from "express";
-import { shortlistEntity } from "../entities/shortlistEntity";
+import { shortlistEntity } from "../entities/shortlistEntity.js";
 const router = express.Router();
 
 class ShortlistController {

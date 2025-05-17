@@ -85,19 +85,15 @@ class UpdateServiceController {
         Number(serviceID),
         updatedData
       );
-      res
-        .status(200)
-        .json({
-          message: "Service updated successfully",
-          service: updatedService,
-        });
+      res.status(200).json({
+        message: "Service updated successfully",
+        service: updatedService,
+      });
     } catch (error) {
-      res
-        .status(404)
-        .json({
-          error: "Service not found or failed to update",
-          details: error,
-        });
+      res.status(404).json({
+        error: "Service not found or failed to update",
+        details: error,
+      });
     }
   }
 }
@@ -110,12 +106,10 @@ class DeleteServiceController {
       await serviceEntity.deleteService(Number(serviceID));
       res.status(200).json({ message: "Service deleted successfully" });
     } catch (error) {
-      res
-        .status(404)
-        .json({
-          error: "Service not found or failed to delete",
-          details: error,
-        });
+      res.status(404).json({
+        error: "Service not found or failed to delete",
+        details: error,
+      });
     }
   }
 }
@@ -130,12 +124,10 @@ class GetServicesByHownerController {
       );
       res.status(200).json(services);
     } catch (error) {
-      res
-        .status(404)
-        .json({
-          error: "Services not found for this homeowner",
-          details: error,
-        });
+      res.status(404).json({
+        error: "Services not found for this homeowner",
+        details: error,
+      });
     }
   }
 }

@@ -4,10 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "view_test": "vitest ./tests/viewEntity.test.js",
+    "profile_test": "vitest ./tests/userProfileEntity.test.js",
+    "account_test": "vitest ./tests/userAccountEntity.test.js",
+    "shortlist_test": "vitest ./tests/shortlistEntity.test.js",
+    "service_test": "vitest ./tests/serviceEntity.test.js",
+    "log_test": "vitest ./tests/logEntity.test.js",
+    "category_test": "vitest ./tests/categoryEntity.test.js"
   },
   "keywords": [],
   "author": "",
+  "type": "module",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
@@ -16,6 +24,7 @@
     "mysql2": "^3.14.0"
   },
   "devDependencies": {
-    "@testcontainers/mysql": "^10.26.0"
+    "@testcontainers/mysql": "^10.26.0",
+    "vitest": "^3.1.3"
   }
 }

@@ -3,13 +3,13 @@ import mysql from "mysql2";
 
 let db;
 
-function initialiseDB(host, user, password, database) {
+function initialiseDB(host, user, password, database, port) {
   db = mysql.createConnection({
     host,
     user,
     password,
     database,
-    port: 3306,
+    port: port || 3306,
   });
 
   db.connect((err) => {

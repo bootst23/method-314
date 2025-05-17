@@ -1,5 +1,5 @@
 import express from "express";
-import { categoryEntity } from "../entities/categoryEntity";
+import { categoryEntity } from "../entities/categoryEntity.js";
 const router = express.Router();
 
 // === Controllers ===
@@ -26,12 +26,10 @@ class CreateCategoryController {
 
     try {
       const newCategory = await categoryEntity.addCategory(category);
-      res
-        .status(201)
-        .json({
-          message: "Category added successfully",
-          category: newCategory,
-        });
+      res.status(201).json({
+        message: "Category added successfully",
+        category: newCategory,
+      });
     } catch (error) {
       res.status(500).json({ error: "Failed to add category", details: error });
     }
@@ -45,22 +43,18 @@ class UpdateCategoryController {
 
     try {
       const updatedCategory = await categoryEntity.updateCategoryByID(
-        categoryID,
+        Number(categoryID),
         updatedData
       );
-      res
-        .status(200)
-        .json({
-          message: "Category updated successfully",
-          category: updatedCategory,
-        });
+      res.status(200).json({
+        message: "Category updated successfully",
+        category: updatedCategory,
+      });
     } catch (error) {
-      res
-        .status(404)
-        .json({
-          error: "Category not found or failed to update",
-          details: error,
-        });
+      res.status(404).json({
+        error: "Category not found or failed to update",
+        details: error,
+      });
     }
   }
 }

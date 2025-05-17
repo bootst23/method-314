@@ -1,5 +1,5 @@
 import express from "express";
-import { userProfileEntity } from "../entities/userProfileEntity";
+import { userProfileEntity } from "../entities/userProfileEntity.js";
 const router = express.Router();
 
 // === Controllers ===
@@ -46,19 +46,15 @@ class UpdateUserProfileController {
         Number(profileID),
         updatedData
       );
-      res
-        .status(200)
-        .json({
-          message: "Profile updated successfully",
-          profile: updatedProfile,
-        });
+      res.status(200).json({
+        message: "Profile updated successfully",
+        profile: updatedProfile,
+      });
     } catch (error) {
-      res
-        .status(404)
-        .json({
-          error: "Profile not found or failed to update",
-          details: error,
-        });
+      res.status(404).json({
+        error: "Profile not found or failed to update",
+        details: error,
+      });
     }
   }
 }

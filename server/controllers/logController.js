@@ -1,5 +1,5 @@
 import express from "express";
-import { logEntity } from "../entities/logEntity";
+import { logEntity } from "../entities/logEntity.js";
 const router = express.Router();
 
 class LogController {
@@ -23,12 +23,10 @@ class LogController {
       res.status(200).json(dailyLogs);
     } catch (error) {
       console.error("Error in getDailyLogs controller:", error);
-      res
-        .status(500)
-        .json({
-          error: "Failed to retrieve daily logs",
-          details: error.message,
-        });
+      res.status(500).json({
+        error: "Failed to retrieve daily logs",
+        details: error.message,
+      });
     }
   }
 
@@ -36,12 +34,10 @@ class LogController {
     try {
       const { startDate, endDate } = req.query;
       if (!startDate || !endDate) {
-        return res
-          .status(400)
-          .json({
-            error:
-              "startDate and endDate query parameters are required for weekly logs.",
-          });
+        return res.status(400).json({
+          error:
+            "startDate and endDate query parameters are required for weekly logs.",
+        });
       }
       // Add date validation if necessary
       if (
@@ -56,12 +52,10 @@ class LogController {
       res.status(200).json(weeklyLogs);
     } catch (error) {
       console.error("Error in getWeeklyLogs controller:", error);
-      res
-        .status(500)
-        .json({
-          error: "Failed to retrieve weekly logs",
-          details: error.message,
-        });
+      res.status(500).json({
+        error: "Failed to retrieve weekly logs",
+        details: error.message,
+      });
     }
   }
 
@@ -69,12 +63,10 @@ class LogController {
     try {
       const { startDate, endDate } = req.query;
       if (!startDate || !endDate) {
-        return res
-          .status(400)
-          .json({
-            error:
-              "startDate and endDate query parameters are required for monthly logs.",
-          });
+        return res.status(400).json({
+          error:
+            "startDate and endDate query parameters are required for monthly logs.",
+        });
       }
       // Add date validation if necessary
       if (
@@ -89,12 +81,10 @@ class LogController {
       res.status(200).json(monthlyLogs);
     } catch (error) {
       console.error("Error in getMonthlyLogs controller:", error);
-      res
-        .status(500)
-        .json({
-          error: "Failed to retrieve monthly logs",
-          details: error.message,
-        });
+      res.status(500).json({
+        error: "Failed to retrieve monthly logs",
+        details: error.message,
+      });
     }
   }
 }

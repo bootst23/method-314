@@ -7,10 +7,9 @@ export default defineConfig({
       "tests/*/vitest.config.{e2e,unit}.js",
       {
         test: {
-          name: "get all accounts",
+          name: "Server Unit Tests",
           root: "./tests",
           environment: "node",
-          setupFiles: ["./setup.js"],
         },
       },
     ],
